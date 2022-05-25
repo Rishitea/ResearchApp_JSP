@@ -21,6 +21,14 @@
 	}
  	number=count;
  %>
+ <script>
+ 	function check(){
+ 		if(!document.addbrand.brandName.value){
+ 			alert("입력 값이 없습니다.");
+ 			return false;
+ 		}
+ 	}
+ </script>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -59,8 +67,8 @@
 %>
 
 <%} %>
-<form action="brandAddProc.jsp" method="post" name="addbrand">
-기타(직접 입력)<input type="text" name="brandType" /><input type="submit" value="전송" id="button"/>
+<form action="brandAddProc.jsp" method="post" name="addbrand" onSubmit="return check()">
+기타(직접 입력)<input type="text" name="brandName" /><input type="submit" value="전송" id="button"/>
 </form>
 </body>
 </html>

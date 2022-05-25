@@ -16,5 +16,6 @@
 <a href="showFavorite.jsp">1. 프차 vs 일반카페</a><br>
 <a href="prefLanking.jsp">2. 프차 - Brand</a><br>
 <a href="reasonPrefPercentage.jsp">3. 선택지 이유 보기</a>
+<br><br><a href="surveyMain.jsp">돌아가기 - 메인</a>
 </body>
 </html>

@@ -6,15 +6,15 @@
 <% request.setCharacterEncoding("UTF-8"); %>
 <!DOCTYPE html>
 <%
-	String brandType = request.getParameter("brandType");//brand.jsp에서 받은 파라미터
+	String brandName = request.getParameter("brandName");//brand.jsp에서 받은 파라미터
 	BrandDAO dbBrand = BrandDAO.getInstance();
-	boolean result = dbBrand.checkBrand(brandType);
+	boolean result = dbBrand.checkBrand(brandName);
 	if(result){
 	response.sendRedirect("./brand.jsp");
 	return;
 	}
 	
-	dbBrand.insertBrand(brandType); //DB 업데이트(Brand 테이블에 입력값 추가)
+	dbBrand.insertBrand(brandName); //DB 업데이트(Brand 테이블에 입력값 추가)
 	response.sendRedirect("./reason.jsp");
 	%>
 	
