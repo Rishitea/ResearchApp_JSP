@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ page import = "memberone.*"%>
-<jsp:useBean id="dao" class="memberone.MemberDao"/>
+<%	MemberDao dao = MemberDao.getInstance(); %>
 <%
 	String loginID = (String)session.getAttribute("loginID");
 	MemberDto dto = dao.getMember(loginID);

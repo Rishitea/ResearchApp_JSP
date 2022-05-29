@@ -5,18 +5,23 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
-	String remember=(String)request.getAttribute("remember");
-	if(remember == null) {
-		remember ="";
-	}
+	String cookieId="";
+	boolean flag = false;
 	Cookie[] cookies = request.getCookies();
-	if(cookies == null) {
-		for(Cookie cookie : cookies) {
-			if(cookie.getName().equals("remember")) {
-				request.setAttribute("remember",cookie.getValue());
-			}
+	for(Cookie c:cookies) {
+		if((c.getName()).equals("remember")) {
+			cookieId = c.getValue();
+			flag = true;
 		}
 	}
+	
+	//if(cookies != null && cookies.length > 0) {
+			//for(int i = 0 ; i < cookies.length ; i++) {
+				//if(cookies[i].getName().equals("userId")) {
+					//cookie = cookies[i].getValue();
+			//}
+		//}
+	//}
 %>
 
 <title>Login</title>
@@ -30,8 +35,8 @@
 					<th colspan="2">회원 로그인</th>
 				</tr>
 				<tr>
-					<td><input type="text" class="id" name="id" value="<%=remember %>" id="uname" placeholder="아이디 입력" required/></td>
-					<td><input class="form-check-input" type="checkbox" name="remember" required/></td>
+					<td><input type="text" class="id" name="id" id="uname" placeholder="아이디 입력" <%if(flag){ %> value="<%=cookieId %>"<%} %> required/></td>
+					<td><input name="remember" type="checkbox" value="remember" <%if(flag) { %> checked <%} %>/>아이디 기억하기</td>
 				</tr>
 				<tr>
 					<td><input type="password" class="pass" name="pass" placeholder="비밀번호 입력"></td>

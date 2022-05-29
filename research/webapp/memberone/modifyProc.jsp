@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import = "memberone.*" %>
-<% request.setCharacterEncoding("UTF-8"); %>
-<jsp:useBean id="dao" class="memberone.MemberDao" />
+<%	MemberDao dao = MemberDao.getInstance(); %>
 <jsp:useBean id="dto" class="memberone.MemberDto" />
 <jsp:setProperty property="*" name="dto" />
+<% request.setCharacterEncoding("UTF-8"); %>
 <%
 	String loginID = (String)session.getAttribute("loginID");
 	dto.setId(loginID);

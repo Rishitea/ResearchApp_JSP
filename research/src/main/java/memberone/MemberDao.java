@@ -8,20 +8,46 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
+
 public class MemberDao {
-	public static String ID = "c##tester";
-	public static String PASSWORD = "1234";
-	public static String IP="localhost";
-	static {
+//	public static String ID = "c##tester";
+//	public static String PASSWORD = "1234";
+//	public static String IP="localhost";
+//	static {
+//		try {
+//			Class.forName("oracle.jdbc.OracleDriver");
+//		} catch(ClassNotFoundException e) {
+//			e.printStackTrace();
+//		}
+//	}
+//	
+//	public static Connection getConnection() throws SQLException{
+//		return DriverManager.getConnection("jdbc:oracle:thin:@"+IP+":1521:xe",ID,PASSWORD);
+//	}
+	private static DataSource ds = null;
+	{
 		try {
-			Class.forName("oracle.jdbc.OracleDriver");
-		} catch(ClassNotFoundException e) {
-			e.printStackTrace();
+			Context init = new InitialContext();
+			ds = (DataSource)init.lookup("java:comp/env/jdbc/myOracle");
+		} catch(Exception e) {
+			System.err.println("Connection 실패");
 		}
 	}
-	
-	public static Connection getConnection() throws SQLException{
-		return DriverManager.getConnection("jdbc:oracle:thin:@"+IP+":1521:xe",ID,PASSWORD);
+	public Connection getConnection() throws SQLException{
+		return ds.getConnection();
+	}
+	private static MemberDao instance = null;
+	private MemberDao() {}
+	public static MemberDao getInstance() {
+		if(instance==null) {
+			synchronized(MemberDao.class) {
+				instance = new MemberDao();
+			}
+		}
+		return instance;
 	}
 	
 	public boolean idCheck(String id) {

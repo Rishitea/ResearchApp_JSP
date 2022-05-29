@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<jsp:useBean id="dao" class="memberone.MemberDao"/>
+<%@ page import = "memberone.*" %>
+<%	MemberDao dao = MemberDao.getInstance(); %>
 <%
 	String id = request.getParameter("id");
 	boolean check = dao.idCheck(id);
