@@ -4,6 +4,7 @@
 <%@ page import="cafe.CoffeeVO" %>
 <%@ page import="java.util.List" %>
 <!DOCTYPE html>
+<% String loginID = (String)session.getAttribute("loginID");%>
 <!-- 
 favoriteProc.jsp -> showFavorite.jsp
  -->
@@ -24,6 +25,7 @@ favoriteProc.jsp -> showFavorite.jsp
 <title>설문 현황 보기 - 1</title>
 </head>
 <body>
+<% if(loginID != null) { %>
 <h1> 프랜차이즈 vs 일반카페</h1>
 <form>
 <table class ="coffeeTable">
@@ -47,5 +49,11 @@ favoriteProc.jsp -> showFavorite.jsp
 </form>
 <br><a href="surveyMain.jsp">돌아가기 - 메인</a>
 <br><a href="showResearch.jsp">돌아가기 - 설문 현황 보기</a>
+<%} else { %>
+		<script>
+			alert("정상적인 접근이 아닙니다. 로그인해주세요.");
+			location.href="../memberone/login.jsp";
+		</script>
+		<% } %>	
 </body>
 </html>

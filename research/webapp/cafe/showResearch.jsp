@@ -5,6 +5,7 @@
 2. 프랜차이즈 순위
 3. 프차 선호 이유 / 일반 선호 이유
  -->
+<% String loginID = (String)session.getAttribute("loginID");%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,10 +13,17 @@
 <title>설문 현황 보기</title>
 </head>
 <body>
+<% if(loginID != null) { %>
 <h1>설문 현황 보기</h1>
 <a href="showFavorite.jsp">1. 프차 vs 일반카페</a><br>
 <a href="prefLanking.jsp">2. 프차 - Brand</a><br>
 <a href="reasonPrefPercentage.jsp">3. 선택지 이유 보기</a>
 <br><br><a href="surveyMain.jsp">돌아가기 - 메인</a>
+<%} else { %>
+		<script>
+			alert("정상적인 접근이 아닙니다. 로그인해주세요.");
+			location.href="../memberone/login.jsp";
+		</script>
+		<% } %>	
 </body>
 </html>

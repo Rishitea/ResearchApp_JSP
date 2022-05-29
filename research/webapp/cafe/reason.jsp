@@ -13,7 +13,7 @@
 reason.jsp -> reasonproc.jsp
 /name="brandType", value="brandVo.getNumber()" 로 가져옴.
  -->
- 
+<% String loginID = (String)session.getAttribute("loginID");%>
  <%
  	//int cfNum = 0; // cfNum=1 => coffeeTable의 프차 / cfNum=2 => coffeeTable의 일반카페 선택
 	//(joinResearch.jsp/updateCF.jsp 의 cFC value 1/2)
@@ -38,6 +38,7 @@ reason.jsp -> reasonproc.jsp
 <title>설문 참여 1</title>
 </head>
 <body>
+<% if(loginID != null) { %>
 <b>이전 선택지에 대한 이유를 골라주세요.</b>
 <form action="reasonProc.jsp">
 <table class = "reasontable">
@@ -60,5 +61,11 @@ reason.jsp -> reasonproc.jsp
 </table>
 <input type="submit" value="선택" id="button">
 </form>
+<%} else { %>
+		<script>
+			alert("정상적인 접근이 아닙니다. 로그인해주세요.");
+			location.href="../memberone/login.jsp";
+		</script>
+		<% } %>	
 </body>
 </html>

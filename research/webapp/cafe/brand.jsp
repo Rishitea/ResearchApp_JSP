@@ -4,11 +4,12 @@
 <%@ page import="cafe.BrandVO" %>
 <%@ page import="java.util.List" %>
 <% request.setCharacterEncoding("UTF-8"); %>
+<% String loginID = (String)session.getAttribute("loginID");%>
 <!DOCTYPE html>
 <!--
 (cFC=1) brand.jsp -> brandproc.jsp 
  (-> reason.jsp -> reasonproc.jsp)
- brand.jsp 자체를 현황보기에서도 쓸 수 있게 수정해야됨
+
  -->
  <%
  	int number=0;
@@ -35,6 +36,7 @@
 <title>설문 조사</title>
 </head>
 <body>
+<% if(loginID != null) { %>
 <h3> 설문 조사</h3>
 선호하는 카페 형태 - 프랜차이즈 카페 선택<br>
 아래 중 선호하는 <b>브랜드</b>를 선택하시고, 만약 없다면 기타란에 직접 입력바랍니다.
@@ -70,5 +72,11 @@
 <form action="brandAddProc.jsp" method="post" name="addbrand" onSubmit="return check()">
 기타(직접 입력)<input type="text" name="brandName" /><input type="submit" value="전송" id="button"/>
 </form>
+<%} else { %>
+		<script>
+			alert("정상적인 접근이 아닙니다. 로그인해주세요.");
+			location.href="../memberone/login.jsp";
+		</script>
+		<% } %>	
 </body>
 </html>

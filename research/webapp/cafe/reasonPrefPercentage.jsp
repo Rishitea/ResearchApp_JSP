@@ -11,7 +11,7 @@
 <%@ page import="java.util.Iterator"%>
 <%@ page import="java.util.Map"%>
 <%@ page import="java.util.HashMap" %>
-
+<% String loginID = (String)session.getAttribute("loginID");%>
 <!DOCTYPE html>
 
 <html>
@@ -20,6 +20,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<% if(loginID != null) { %>
 <h1>각 선택지 이유 보기</h1>
 <h2>1. 프랜차이즈 선호</h2>
 <%
@@ -84,5 +85,11 @@
 <br><a href="surveyMain.jsp">돌아가기 - 메인</a>
 <br><a href="showResearch.jsp">돌아가기 - 설문 현황 보기</a>
 
+<%} else { %>
+		<script>
+			alert("정상적인 접근이 아닙니다. 로그인해주세요.");
+			location.href="../memberone/login.jsp";
+		</script>
+		<% } %>	
 </body>
 </html>
