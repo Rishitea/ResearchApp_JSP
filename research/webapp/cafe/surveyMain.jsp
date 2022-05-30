@@ -16,6 +16,8 @@
 <a href="showResearch.jsp">2. 설문 현황 보기</a><br>
 <br><br><br>
 <a href="../memberone/main.jsp"><b>로그인 화면으로 돌아가기</b></a>
+
+
 </form>
 <%} else { %>
 		<script>

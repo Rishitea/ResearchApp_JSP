@@ -19,7 +19,8 @@
 			</tr>
 		</table>
 		<br>
-		<a href="../cafe/surveyMain.jsp">설문조사 페이지로 이동</a>
+		<a href="../cafe/surveyMain.jsp">설문조사 페이지로 이동</a><br>
+		<a href="../boardone/writeForm.jsp"><b>게시판 글쓰기</b></a>
 		<% } else { %>
 		<script>
 			alert("정상적인 접근이 아닙니다. 로그인해주세요.");
