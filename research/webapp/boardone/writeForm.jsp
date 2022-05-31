@@ -4,19 +4,16 @@
 <jsp:useBean id="dto" class="memberone.MemberDto"/>
 <jsp:setProperty name="dto" property="*"/>
 
-<% String loginID = (String)session.getAttribute("loginID");%>
-<%
-	String email = ""; //dto.getEmail();
+<% 	String writer = (String)session.getAttribute("loginID");
 	
-	if(loginID != null) {
+	if(writer != null) {
+		String email = ""; //dto.getEmail();
 		MemberDao memberDao = MemberDao.getInstance();
-		email = memberDao.getMember(loginID).getEmail();}
+		email = memberDao.getMember(writer).getEmail();
 %>
-
 <!DOCTYPE html>
 <html>
 <head>
-<% if(loginID != null) { %>
 <meta charset="UTF-8">
 <script src="script.js"></script>
 <title>My Board</title>
@@ -40,11 +37,11 @@
 	<section>
 	<b>글쓰기</b>
 	<article>
-		<form method="post" name="writeForm" action="writeProc.jsp" onsubmit="return writeSave()">
+		<form method="post" name="writeForm" action="writeProc.jsp" onsubmit="return writeSave()" enctype="multipart/form-data">
 		<table class="board">
 			<tr>
 				<td class="attr"> 이름 </td>
-				<td><input type="text" name="writer" value="<%=loginID%>" readonly/></td>
+				<td><input type="text" name="writer" value="<%=writer%>" readonly/></td>
 			</tr>
 			<tr>
 				<td class="attr"> 제목 </td>
@@ -66,6 +63,9 @@
 				<td class="attr">비밀번호</td>
 				<td><input type="password" name="pass" /></td>
 			</tr>
+			<tr>
+				<td class="attr">파일 선택</td>
+				<td><input type="file" name="uploadFile"/></td>
 			<tr>
 				<td colspan="2" class="attr">
 					<input type="submit" value="글쓰기" />

@@ -7,9 +7,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.sql.DataSource;
+//import javax.naming.Context;
+//import javax.naming.InitialContext;
+//import javax.sql.DataSource;
+//
+//import boardAttach.BoardAttachDto;
+import boardAttach.ConnUtil;
 
 public class BoardDao {
 	
@@ -282,6 +285,30 @@ public class BoardDao {
 			if(conn!=null) try {conn.close();} catch(SQLException e) {}	
 		}
 		return result;
+	}
+	public int findNum() { //현재 sequence 찾기 - attach_bno로 참조
+		int x=0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select BOARD_SEQ.currval from dual";
+		try {
+			conn = ConnUtil.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				x = rs.getInt(1);
+			}
+			System.out.println("findNum : "+x);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(rs!=null) try {rs.close();} catch(SQLException e) {}
+			if(pstmt!=null) try {pstmt.close();} catch(SQLException e) {}
+			if(conn!=null) try {conn.close();} catch(SQLException e) {}	
+		}
+		
+		return x;
 	}
 	
 }

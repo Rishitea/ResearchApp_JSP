@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%@ page import = "boardone.BoardDao" %>
-<%@ page import = "boardone.BoardDto" %>
+<%@ page import = "boardone.*, java.util.*" %>
 <%@ page import = "java.text.SimpleDateFormat"%>
+
+<%@ page import = "boardAttach.*" %>
+
 <% String loginID = (String)session.getAttribute("loginID");%>
 <html>
 <head>
@@ -22,6 +24,7 @@
 		int step = article.getStep();
 		int depth = article.getDepth();
 %>
+
 <body>
 <section>
 <article>
@@ -47,6 +50,28 @@
 		<tr>
 			<th>글내용</th>
 			<td colspan="3" class="content"><pre><%=article.getContent() %></pre></td>
+		</tr>
+		<tr>
+			<th>첨부파일</th>
+	
+<% 
+	BoardAttachDao dbBAD = BoardAttachDao.getInstance();
+	BoardAttachDto temp;
+	String re = "";
+	List<BoardDto> l = dbPro.getArticles();
+	for(BoardDto b : l){
+		if(b.getNum()==num){
+			re=dbBAD.select(b.getNum());	%>
+			<td>
+			<%if (re !="no file") {%>
+			<a href="downloadProc.jsp?name=<%=re %>"><%=re %></a></td> 
+			<%} else {%>
+				<%="no file" %>
+			<%}%>
+		<%break;
+		}
+	}
+%>	
 		</tr>
 		<tr>
 			<td colspan="4">
